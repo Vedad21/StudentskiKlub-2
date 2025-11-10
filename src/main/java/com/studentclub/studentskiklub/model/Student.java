@@ -1,16 +1,36 @@
 package com.studentclub.studentskiklub.model;
 
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "students")
 public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String ime;
+
+    @Column(nullable = false)
     private String prezime;
+
+    @Column(unique = true)
     private String email;
+
+    @Column(unique = true)
     private String brojIndeksa;
+
+    // Relacija 1:N sa Membership
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Membership> memberships = new ArrayList<>();
 
     public Student() {}
 
-    public Student(Long id, String ime, String prezime, String email, String brojIndeksa) {
-        this.id = id;
+    public Student(String ime, String prezime, String email, String brojIndeksa) {
         this.ime = ime;
         this.prezime = prezime;
         this.email = email;
@@ -56,5 +76,13 @@ public class Student {
 
     public void setBrojIndeksa(String brojIndeksa) {
         this.brojIndeksa = brojIndeksa;
+    }
+
+    public List<Membership> getMemberships() {
+        return memberships;
+    }
+
+    public void setMemberships(List<Membership> memberships) {
+        this.memberships = memberships;
     }
 }

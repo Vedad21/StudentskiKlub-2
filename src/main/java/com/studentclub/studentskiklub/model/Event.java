@@ -1,24 +1,32 @@
 package com.studentclub.studentskiklub.model;
 
-import java.util.List;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "events")
 public class Event {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String naziv;
+
     private String datum;
+
     private String lokacija;
+
+    @Column(length = 500)
     private String opis;
-    private List<Long> studentIds; // Lista ID-eva studenata koji prisustvuju
 
     public Event() {}
 
-    public Event(Long id, String naziv, String datum, String lokacija, String opis, List<Long> studentIds) {
-        this.id = id;
+    public Event(String naziv, String datum, String lokacija, String opis) {
         this.naziv = naziv;
         this.datum = datum;
         this.lokacija = lokacija;
         this.opis = opis;
-        this.studentIds = studentIds;
     }
 
     // Getteri i Setteri
@@ -60,13 +68,5 @@ public class Event {
 
     public void setOpis(String opis) {
         this.opis = opis;
-    }
-
-    public List<Long> getStudentIds() {
-        return studentIds;
-    }
-
-    public void setStudentIds(List<Long> studentIds) {
-        this.studentIds = studentIds;
     }
 }

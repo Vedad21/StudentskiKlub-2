@@ -48,7 +48,7 @@
     </style>
 </head>
 <body>
-<h1>🎉 Lista Evenata Kluba</h1>
+<h1>Lista Evenata Kluba</h1>
 
 <table>
     <thead>
@@ -58,7 +58,6 @@
         <th>Datum</th>
         <th>Lokacija</th>
         <th>Opis</th>
-        <th>Broj Učesnika</th>
     </tr>
     </thead>
     <tbody>
@@ -68,13 +67,13 @@
         <td th:text="${event.datum}"></td>
         <td th:text="${event.lokacija}"></td>
         <td th:text="${event.opis}"></td>
-        <td th:text="${#lists.size(event.studentIds)}"></td>
     </tr>
     </tbody>
 </table>
 
 <div class="nav">
     <a href="/a">Pogledaj Studente</a>
+    <a href="/memberships">Članstva</a>
 </div>
 </body>
 </html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Članstava</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .actions {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .actions a {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #FF5722;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .action-links a {
+            margin-right: 10px;
+            text-decoration: none;
+        }
+        .edit-link {
+            color: #2196F3;
+        }
+        .delete-link {
+            color: #f44336;
+        }
+        .nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .nav a {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<h1>Lista Članstava</h1>
+
+<div class="actions">
+    <a href="/memberships/new">Dodaj Novo Članstvo</a>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Student</th>
+        <th>Tip Članstva</th>
+        <th>Datum Početka</th>
+        <th>Datum Isteka</th>
+        <th>Status</th>
+        <th>Cijena (KM)</th>
+        <th>Akcije</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="membership : ${memberships}">
+        <td th:text="${membership.id}"></td>
+        <td th:text="${membership.student.ime + ' ' + membership.student.prezime}"></td>
+        <td th:text="${membership.tipClanstva}"></td>
+        <td th:text="${membership.datumPocetka}"></td>
+        <td th:text="${membership.datumIsteka}"></td>
+        <td th:text="${membership.status}"></td>
+        <td th:text="${membership.cijena}"></td>
+        <td class="action-links">
+            <a th:href="@{/memberships/edit/{id}(id=${membership.id})}" class="edit-link">Izmijeni</a>
+            <a th:href="@{/memberships/delete/{id}(id=${membership.id})}" class="delete-link"
+               onclick="return confirm('Da li ste sigurni?')">Obriši</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="nav">
+    <a href="/a">Studenti</a>
+    <a href="/b">Eventi</a>
+    <a href="/memberships">Članstva</a>
+</div>
+</body>
+</html>
